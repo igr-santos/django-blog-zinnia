@@ -1,6 +1,7 @@
 """Author model for Zinnia"""
 from django.db import models
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model # incompatible Django1.7
+from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 
 from zinnia.managers import entries_published
@@ -19,7 +20,7 @@ class AuthorPublishedManager(models.Model):
 
 
 @python_2_unicode_compatible
-class Author(get_user_model(),
+class Author(User,  # get_user_model(), # incompatible Django1.7
              AuthorPublishedManager):
     """
     Proxy model around :class:`django.contrib.auth.models.get_user_model`.
